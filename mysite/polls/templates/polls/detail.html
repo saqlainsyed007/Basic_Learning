@@ -1,0 +1,41 @@
+{% extends 'polls/base.html' %}
+
+{% comment %} Extending the base.html and redefining content block {% endcomment %}
+{% block content %}
+<center>
+<h1>{{ question.question_text }}</h1>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<form action="{% url 'polls:vote' question.id %}" method="post">
+  {% csrf_token %}
+  <table>
+    {% for choice in question.choice_set.all %}
+      <tr><td>
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+      </td></tr>
+      {% comment %} 
+       The for attribute of label indicates to which element the label is assigned to.
+      {% endcomment %}
+    {% endfor %}
+    <tr><th>
+      <input type="submit" value="Vote" />
+    </th></tr>
+  </table>
+</form>
+</center>
+{% endblock content %}
+
+{% comment %}
+
+    1. The above form upon submitting will go to url /polls/question_id/vote/ along with a POST objecct that
+       includes the elements in the form i.e, choice = some_value. choice is the only element present that
+       gets the value choice_id.
+    2. The choice_set.all indicates all the foreign key relations that Question shares with Choice.
+       choice_set is created automatically by Django in the Question class when you write
+       models.foreign_key(Question) in the Choice table. The choice_set is a collection of all Choices that are
+       related to Question.
+       Note: Refer 'models.py'. choice_set is the name because Question has a set Choice(s) that relate to it. If the models.foreign_key would
+       be defined in class Foo, then Question would have foo_set.
+    3. The {% csrf_token %} is used for security purposes.  It protects our post data against network modifications.
+
+{% endcomment %}

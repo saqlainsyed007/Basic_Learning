@@ -1,0 +1,35 @@
+<html>
+<head>
+	<title>Polls App</title>
+</head>
+<body>
+	<center>
+		<div style="margin-top: 5%;position:relative">
+			<form method="post" action="{% url 'login_authenticate' %}">
+				{% csrf_token %}
+				<table>
+				<tr><th>
+					<label>User Name<input type="text" name="username"/></label><br/><br/>
+				</th></tr>
+				<tr><th>
+					<label>Password<input type="password" name="password"/></label><br/><br/>
+				</th></tr>
+				<tr><th>
+					<input type="submit" value="login" /><br/>
+					<input type="hidden" name="next" value="{{ request.GET.next }}" />
+				</th></tr>
+				</table>
+				{% comment %}
+					The above input is hidden because it has no significance
+					to the user it is only used by us to ensure that when a user
+					tries to access a page for which login is required, He/She is
+					redirected to the login page and once they login, they are 
+					redirected to the page they were trying to access and not the 
+					home page.
+					By default we get 'next' variable through 'GET' method when we
+					try to access a protected page without login.
+				{% endcomment %}
+			</form>
+		</div>
+	</center>
+</body>

@@ -1,0 +1,30 @@
+{% load staticfiles %}
+{% comment %} It is important to load  the static files if you use them {% endcomment %}
+
+<html>
+	<head>
+		<title>Basic Learning</title>
+		{% comment %} Linking an external CSS file {% endcomment %}
+		<link rel="stylesheet" type="text/css" href="{% static 'polls/css/style.css' %}" />
+	</head>
+	<body>
+		<div style="right: 50px;position: absolute">
+			{% comment %}
+				If the user is logged in, display the user_name followed by
+				logout link.
+				If not display login link.
+			{% endcomment %}
+			{% if user.is_authenticated %}
+				{{ user.username }} | <a href="/logout/">Logout</a> </div>
+			{% else %}
+				<a href="/login/">Login</a>
+			{% endif %}
+		</div>
+		{% comment %}
+			The below content block will be overwritten by another Html that extends
+			this template
+		{% endcomment %}
+		{% block content %}
+		{% endblock content %}
+	</body>
+</html>

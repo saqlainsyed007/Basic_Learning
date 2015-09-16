@@ -1,0 +1,40 @@
+Note: Refer to this only wen you have completed atleast the basics of django.
+      Use the tutorial and if you get stuck somewhere yoy can always refer to the code in this project.
+      The code isn't exactly same as in the tutorial. It has a few additions and deletions.
+
+{{ variable_name }}
+
+	# The above code is to used to get the value of the variable.
+  	  The variable is passed in the Url from views.py file using 'context'.
+
+{% for obj in objects_list %}
+	do_something
+{% endfor %}
+
+	# The above code is to use for loop in django templates.
+  	  Here, objects_list is a variable(list of objects) passedin the views.py
+
+{% if variable_name == value %}
+	do_something
+{% elif %}
+	do_something
+{% else %}
+	do_something
+{% endif %}
+
+	# The above code is to use if statement in django templates.
+  	  Here, variable_name is a variable passed in the views.py
+
+{% block block_name %}
+	Html goes here
+{% endblock %}
+
+	# block tag is just used to define blocks it doesn,t make any difference to
+	  your present html code but it finds it's application in extending templates.
+
+{% extends 'folder_name/base.html' %}
+	# The above is called extends template tag. It is used when the entire list
+	  of webpages in our application are same except for some few changes.
+	  To do this we create a base.html present in templates/folder_name/ and define blocks.
+	  Now when we extend this block and redefine the block it automatically renders the base.html
+	  except that the contents of the block are replaced with the newly defined contents.

@@ -1,0 +1,22 @@
+body
+{
+	background: url("background.jpg");
+	background-repeat: no-repeat;
+}
+.img-rounded 
+{
+	border-radius: 10px;
+}
+li:hover
+{
+	color: green;
+}
+a
+{
+	color: green;
+}
+a:hover
+{
+	color: red;
+}
+
